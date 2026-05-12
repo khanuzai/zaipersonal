@@ -16,15 +16,21 @@ interface Entry {
 
 const ENTRIES: Entry[] = [
   {
-    company: "Leapap",
-    role: "Incoming Software Engineer",
-    period: "Summer 2026",
-    description: "Incoming SWE — will be working on financial transaction software.",
-    tag: "INCOMING",
+    company: "LeapAP Inc.",
+    role: "Software Engineering Intern",
+    period: "May 2026 – Aug 2026",
+    description: "all week one btw.",
+    bullets: [
+      "Built 2 parsers and 3 scrapers integrating 5 billing portals and processing 20+ invoices in production within the first week of onboarding",
+      "Resolved 2 triage incidents by debugging scraper failures using Grafana and Graylog, identifying root causes such as bot detection blocks and malformed HTML structures",
+      "Shipped 20+ commits to production via GitLab, contributing to a high-velocity deploy pipeline that pushes to prod multiple times daily",
+      "Engineered bot detection circumvention logic and invoice parsing pipelines using Node.js and Puppeteer, handling edge cases across portals with varying layouts",
+    ],
+    tech: ["Node.js", "Puppeteer", "GitLab", "Grafana", "Graylog", "Docker", "AWS"],
   },
   {
     company: "PixelsBoost",
-    role: "Software Developer",
+    role: "Software Development Engineer",
     period: "Sep 2025 – Dec 2025",
     bullets: [
       "Delivered 5 full-stack client websites to production serving 2,000+ monthly users",
@@ -32,17 +38,6 @@ const ENTRIES: Entry[] = [
       "Boosted performance by 42%, improving Lighthouse scores from 68 to 87, reducing bounce rate by 18%",
     ],
     tech: ["React", "JavaScript", "HTML/CSS", "Stripe", "Google Maps API", "Cloudflare"],
-  },
-  {
-    company: "Foree Remittance",
-    role: "Financial Services Representative",
-    period: "May 2024 – Nov 2024",
-    bullets: [
-      "Served 200+ daily customers with international remittance inquiries",
-      "Exceeded monthly sales targets by 15% consistently",
-      "Cut average customer wait times from 8 to 4 minutes through workflow optimization",
-    ],
-    tech: ["Fintech", "Customer Operations", "Sales"],
   },
   {
     company: "Fast Webs",

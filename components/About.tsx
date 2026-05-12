@@ -66,8 +66,8 @@ export default function About() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
-      style={{ paddingTop: "200px", paddingBottom: "200px" }}
+      className="relative w-full min-h-screen flex items-center overflow-hidden"
+      style={{ paddingTop: "80px" }}
     >
       {/* Faint radial glow — light source behind the text */}
       <div

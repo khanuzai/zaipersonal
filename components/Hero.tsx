@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const SOCIAL_LINKS = [
-  { label: "GitHub",   href: "https://github.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/" },
-  { label: "Twitter",  href: "https://twitter.com/" },
-  { label: "Email",    href: "mailto:placeholder@email.com" },
+  { label: "GitHub",   href: "https://github.com/khanuzai" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/khanzai" },
+  { label: "Twitter",  href: "https://x.com/kh4nzai" },
+  { label: "Email",    href: "mailto:abdullah.khan1@uwaterloo.ca" },
 ];
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -31,7 +31,7 @@ export default function Hero() {
           alt=""
           aria-hidden
           className="w-full h-full object-cover object-bottom"
-          style={{ filter: "brightness(0.75) contrast(1.1)" }}
+          style={{ filter: "brightness(0.83) contrast(1.1)" }}
         />
         {/* Top edge melts into pure black */}
         <div
