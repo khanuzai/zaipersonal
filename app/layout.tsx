@@ -6,6 +6,9 @@ import CustomCursor from "@/components/CustomCursor";
 import RainCanvas from "@/components/RainCanvas";
 import SmoothScroll from "@/components/SmoothScroll";
 import PixelCursorTrail from "@/components/ui/pixel-trail";
+import Nav from "@/components/Nav";
+import GlobalSpotlight from "@/components/GlobalSpotlight";
+import PageTransition from "@/components/PageTransition";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,8 +26,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Zai — Abdullah Khan",
-  description:
-    "CS/BBA @ Waterloo. Builder. Toronto.",
+  description: "CS/BBA @ Waterloo. Builder. Toronto.",
   openGraph: {
     title: "Zai — Abdullah Khan",
     description: "CS/BBA @ Waterloo. Builder. Toronto.",
@@ -47,7 +49,9 @@ export default function RootLayout({
         <RainCanvas />
         <PixelCursorTrail />
         <CustomCursor />
-        {children}
+        <GlobalSpotlight />
+        <Nav />
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

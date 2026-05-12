@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Skyline from "./Skyline";
 
 const SOCIAL_LINKS = [
   { label: "GitHub",   href: "https://github.com/" },
@@ -24,7 +23,7 @@ export default function Hero() {
   return (
     <section className="relative flex flex-col h-screen overflow-hidden bg-black">
 
-      {/* ─── Toronto skyline photo — bottom 57.5% ──────────────────── */}
+      {/* Toronto skyline photo — bottom 57.5% */}
       <div className="absolute bottom-0 left-0 right-0 h-[57.5%] z-[1] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -52,10 +51,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* ─── Canvas: bat signal + rain (full hero, above photo) ────── */}
-      <Skyline />
-
-      {/* ─── Radial vignette — spotlights center ───────────────────── */}
+      {/* Radial vignette — spotlights center */}
       <div
         className="absolute inset-0 pointer-events-none z-[50]"
         style={{
@@ -64,7 +60,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ─── Name / info block ──────────────────────────────────────── */}
+      {/* Name / info block */}
       <div className="relative z-[60] flex flex-col justify-center flex-1 px-10 md:px-16 pt-28 pb-4">
         {/* ZAI — spread across full width */}
         <motion.div
@@ -116,7 +112,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ─── Divider line ───────────────────────────────────────────── */}
+      {/* Divider line — draws itself in from left */}
       <motion.div
         className="relative z-[60] w-full h-px bg-gotham-light/50"
         initial={{ scaleX: 0, opacity: 0 }}
@@ -125,21 +121,8 @@ export default function Hero() {
         style={{ transformOrigin: "left" }}
       />
 
-      {/* spacer that fills the photo region so flex layout matches proportions */}
+      {/* Spacer fills the photo region so flex layout matches proportions */}
       <div className="flex-[0_0_57.5%]" />
-
-      {/* ─── Scroll indicator ───────────────────────────────────────── */}
-      <motion.div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[60]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.2 }}
-      >
-        <span className="font-mono text-[8px] tracking-[0.3em] text-off-white/20 uppercase">
-          Scroll
-        </span>
-        <div className="w-px h-10 bg-gradient-to-b from-off-white/20 to-transparent" />
-      </motion.div>
     </section>
   );
 }
