@@ -5,15 +5,15 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 const links = [
-  { href: "/about",      label: "About" },
-  { href: "/experience", label: "Experience" },
-  { href: "/projects",   label: "Projects" },
-  { href: "/resume",     label: "Resume" },
-  { href: "/gallery",    label: "Gallery" },
-  { href: "/friends",    label: "Friends" },
-  { href: "/media",      label: "Media" },
-  { href: "/quotes",     label: "Quotes" },
-  { href: "/links",      label: "Links" },
+  { href: "/about",      label: "about" },
+  { href: "/experience", label: "experience" },
+  { href: "/projects",   label: "projects" },
+  { href: "/resume",     label: "resume" },
+  { href: "/gallery",    label: "gallery" },
+  { href: "/friends",    label: "friends" },
+  { href: "/media",      label: "media" },
+  { href: "/quotes",     label: "quotes" },
+  { href: "/links",      label: "links" },
 ];
 
 export default function Nav() {
@@ -28,7 +28,7 @@ export default function Nav() {
     >
       <Link
         href="/"
-        className="font-mono text-[11px] tracking-[0.3em] text-off-white/80 hover:text-off-white transition-colors duration-200 uppercase shrink-0"
+        className="font-mono text-[11px] tracking-[0.3em] text-off-white/80 hover:text-off-white transition-colors duration-200 shrink-0"
       >
         ZAI
       </Link>
@@ -39,7 +39,7 @@ export default function Nav() {
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`font-mono text-[11px] tracking-[0.18em] transition-colors duration-200 uppercase ${
+                className={`font-mono text-[11px] tracking-[0.18em] transition-colors duration-200 ${
                   active
                     ? "text-off-white/90"
                     : "text-off-white/60 hover:text-off-white"

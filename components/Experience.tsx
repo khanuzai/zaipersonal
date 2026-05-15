@@ -182,11 +182,10 @@ export default function Experience() {
           fontSize: "10px",
           letterSpacing: "0.38em",
           color: "rgba(240,240,240,0.28)",
-          textTransform: "uppercase",
           marginBottom: "72px",
         }}
       >
-        Experience
+        experience
       </p>
 
       {/* ── Timeline wrapper ────────────────────────────────────────────── */}
@@ -278,7 +277,6 @@ export default function Experience() {
                           color: "rgba(240,240,240,0.95)",
                           display: "inline-block",
                           letterSpacing: "0.04em",
-                          textTransform: "uppercase",
                           transform: "translateY(110%)",
                         }}
                       >
@@ -295,7 +293,6 @@ export default function Experience() {
                           padding: "3px 10px",
                           border: "1px solid rgba(184,212,232,0.18)",
                           borderRadius: "2px",
-                          textTransform: "uppercase",
                           animation: "incomingGlow 2.8s ease-in-out infinite",
                           display: "inline-block",
                         }}

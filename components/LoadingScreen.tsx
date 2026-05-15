@@ -41,12 +41,12 @@ export default function LoadingScreen({ onComplete }: Props) {
 
           {/* "A ZAI PRODUCTION" */}
           <motion.p
-            className="relative font-mono text-[11px] text-off-white tracking-[0.55em] uppercase font-thin select-none"
+            className="relative font-mono text-[11px] text-off-white tracking-[0.55em] font-thin select-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
           >
-            A ZAI PRODUCTION
+            a zai production
           </motion.p>
         </motion.div>
       )}

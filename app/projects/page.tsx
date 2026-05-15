@@ -32,10 +32,9 @@ export default function ProjectsPage() {
           fontSize: "10px",
           letterSpacing: "0.38em",
           color: "rgba(240,240,240,0.28)",
-          textTransform: "uppercase",
         }}
       >
-        Projects
+        projects
       </motion.p>
     </main>
   );

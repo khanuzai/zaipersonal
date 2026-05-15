@@ -1,14 +1,17 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+// ─── Social links ────────────────────────────────────────────────────────────
 const SOCIAL_LINKS = [
-  { label: "GitHub",   href: "https://github.com/khanuzai" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/khanzai" },
-  { label: "Twitter",  href: "https://x.com/kh4nzai" },
-  { label: "Email",    href: "mailto:abdullah.khan1@uwaterloo.ca" },
+  { label: "github",   href: "https://github.com/khanuzai" },
+  { label: "linkedin", href: "https://linkedin.com/in/khanzai" },
+  { label: "twitter",  href: "https://x.com/kh4nzai" },
+  { label: "email",    href: "mailto:abdullah.khan1@uwaterloo.ca" },
 ];
 
+// ─── Entrance animation ──────────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 function fadeUp(delay: number) {
@@ -19,6 +22,74 @@ function fadeUp(delay: number) {
   };
 }
 
+// ─── Split-flap word cycler ──────────────────────────────────────────────────
+const FLIP_WORDS = [
+  "builder",
+  "engineer",
+  "hacker",
+  "mathematician",
+  "founder",
+  "obsessed",
+  "relentless",
+];
+const CHARSET         = "abcdefghijklmnopqrstuvwxyz";
+const SCRAMBLE_FRAMES = 12;
+const FRAME_MS        = 42;
+const HOLD_MS         = 2000;
+
+function FlipBoardWord() {
+  const [text, setText] = useState(FLIP_WORDS[0]);
+  const wordIdxRef      = useRef(0);
+  const mountedRef      = useRef(true);
+
+  useEffect(() => {
+    mountedRef.current = true;
+
+    const scrambleTo = (target: string, onDone: () => void) => {
+      let frame = 0;
+      const tick = () => {
+        if (!mountedRef.current) return;
+        if (frame >= SCRAMBLE_FRAMES) {
+          setText(target);
+          onDone();
+          return;
+        }
+        const chars = target.split("").map((ch, i) => {
+          const settleAt = Math.floor((i / target.length) * SCRAMBLE_FRAMES * 0.65);
+          return frame >= settleAt ? ch : CHARSET[Math.floor(Math.random() * CHARSET.length)];
+        });
+        setText(chars.join(""));
+        frame++;
+        setTimeout(tick, FRAME_MS);
+      };
+      tick();
+    };
+
+    const cycle = () => {
+      if (!mountedRef.current) return;
+      setTimeout(() => {
+        if (!mountedRef.current) return;
+        wordIdxRef.current = (wordIdxRef.current + 1) % FLIP_WORDS.length;
+        scrambleTo(FLIP_WORDS[wordIdxRef.current], cycle);
+      }, HOLD_MS);
+    };
+
+    cycle();
+    return () => { mountedRef.current = false; };
+  }, []);
+
+  return (
+    <motion.p
+      className="font-mono text-off-white/40 mt-2 tracking-[0.28em]"
+      style={{ fontSize: "clamp(9px, 1vw, 13px)" }}
+      {...fadeUp(0.26)}
+    >
+      {text}
+    </motion.p>
+  );
+}
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
 export default function Hero() {
   return (
     <section className="relative flex flex-col h-screen overflow-hidden bg-black">
@@ -33,7 +104,6 @@ export default function Hero() {
           className="w-full h-full object-cover object-bottom"
           style={{ filter: "brightness(0.83) contrast(1.1)" }}
         />
-        {/* Top edge melts into pure black */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -41,7 +111,6 @@ export default function Hero() {
               "linear-gradient(to bottom, #080808 0%, rgba(8,8,8,0.78) 18%, rgba(8,8,8,0.22) 38%, rgba(8,8,8,0) 52%)",
           }}
         />
-        {/* Left / right vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -51,7 +120,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* Radial vignette — spotlights center */}
+      {/* Radial vignette */}
       <div
         className="absolute inset-0 pointer-events-none z-[50]"
         style={{
@@ -78,23 +147,26 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        {/* ABDULLAH KHAN */}
+        {/* Name — dominant */}
         <motion.p
-          className="font-mono font-extralight text-off-white/70 mt-2 tracking-[0.14em] uppercase"
-          style={{ fontSize: "clamp(16px, 3.2vw, 52px)" }}
-          {...fadeUp(0.15)}
+          className="font-mono font-extralight mt-3 tracking-[0.14em]"
+          style={{ fontSize: "clamp(21px, 3.6vw, 58px)", color: "#B0B0B0" }}
+          {...fadeUp(0.1)}
         >
-          Abdullah Khan
+          abdullah khan
         </motion.p>
 
-        {/* Subtitle */}
+        {/* Permanent credentials */}
         <motion.p
-          className="font-mono text-off-white/40 mt-3 tracking-[0.28em] uppercase"
+          className="font-mono text-off-white/40 mt-2 tracking-[0.22em]"
           style={{ fontSize: "clamp(9px, 1vw, 13px)" }}
-          {...fadeUp(0.28)}
+          {...fadeUp(0.18)}
         >
-          CS / BBA @ Waterloo &nbsp;·&nbsp; Builder &nbsp;·&nbsp; Toronto
+          cs @ uwaterloo · bba @ laurier
         </motion.p>
+
+        {/* Rotating split-flap word */}
+        <FlipBoardWord />
 
         {/* Social links */}
         <motion.div className="flex gap-6 mt-6" {...fadeUp(0.42)}>
@@ -104,7 +176,7 @@ export default function Hero() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[12px] tracking-[0.22em] text-off-white/75 hover:text-off-white transition-colors duration-300 uppercase"
+              className="font-mono text-[12px] tracking-[0.22em] text-off-white/75 hover:text-off-white transition-colors duration-300"
             >
               {label}
             </a>
@@ -121,7 +193,7 @@ export default function Hero() {
         style={{ transformOrigin: "left" }}
       />
 
-      {/* Spacer fills the photo region so flex layout matches proportions */}
+      {/* Spacer fills the photo region */}
       <div className="flex-[0_0_57.5%]" />
     </section>
   );

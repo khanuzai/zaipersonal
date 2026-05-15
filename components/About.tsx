@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const SENTENCE = "CS at UWaterloo. BBA at Laurier. I build things that feel like something.";
-const MARQUEE_SEGMENT = "CS · BBA · WATERLOO · LAURIER · BUILDER · CRAFT · ";
+const MARQUEE_SEGMENT = "cs · bba · waterloo · laurier · builder · craft · ";
 
 export default function About() {
   const sectionRef   = useRef<HTMLElement>(null);
