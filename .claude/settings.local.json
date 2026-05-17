@@ -3,7 +3,8 @@
     "allow": [
       "Bash(pnpm dev *)",
       "Bash(curl -s http://localhost:3002)",
-      "Bash(pnpm exec *)"
+      "Bash(pnpm exec *)",
+      "Bash(pnpm build *)"
     ]
   }
 }
