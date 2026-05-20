@@ -87,6 +87,7 @@ export default function Projects() {
         opacity: 0,
         filter: "blur(6px)",
       });
+      
 
       gsap.to(watermarkRef.current, {
         opacity: 1,
@@ -187,6 +188,24 @@ export default function Projects() {
 }
 
 import { forwardRef } from "react";
+
+// Bold key phrases + numeric metrics in bullet text
+const BOLD_SPLIT =
+  /(all 8 planets|high-resolution textures|100\+ books|hourly|5 threat categories|\$[\d,]+[KkMmBb]+\+?|\d[\d,]*(?:\.\d+)?(?:[KkMmGgBb][Bb]?)?\+?%?)/g;
+const BOLD_TEST =
+  /^(all 8 planets|high-resolution textures|100\+ books|hourly|5 threat categories|\$[\d,]+[KkMmBb]+\+?|\d[\d,]*(?:\.\d+)?(?:[KkMmGgBb][Bb]?)?\+?%?)$/;
+
+function boldImpact(text: string) {
+  return text.split(BOLD_SPLIT).map((part, idx) =>
+    BOLD_TEST.test(part) ? (
+      <strong key={idx} style={{ color: "rgba(240,240,240,0.92)", fontWeight: 600 }}>
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
 
 const ProjectCard = forwardRef<HTMLDivElement, { project: Project }>(
   function ProjectCard({ project }, ref) {
@@ -299,19 +318,23 @@ const ProjectCard = forwardRef<HTMLDivElement, { project: Project }>(
                 rel="noopener noreferrer"
                 style={{
                   fontFamily: "var(--font-geist-mono)",
-                  fontSize: "11px",
-                  letterSpacing: "0.14em",
-                  color: "rgba(240,240,240,0.38)",
+                  fontSize: "13px",
+                  letterSpacing: "0.10em",
+                  color: "rgba(240,240,240,0.85)",
                   textDecoration: "none",
-                  transition: "color 0.25s ease",
+                  borderBottom: "1px solid transparent",
+                  paddingBottom: "1px",
+                  transition: "color 0.25s ease, border-color 0.25s ease",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "rgba(184,212,232,0.78)";
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.color = "rgba(184,212,232,0.95)";
+                  el.style.borderBottomColor = "rgba(184,212,232,0.55)";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "rgba(240,240,240,0.38)";
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.color = "rgba(240,240,240,0.85)";
+                  el.style.borderBottomColor = "transparent";
                 }}
               >
                 ↗ {link.label}
@@ -326,7 +349,7 @@ const ProjectCard = forwardRef<HTMLDivElement, { project: Project }>(
             fontFamily: "var(--font-geist-sans)",
             fontSize: "13px",
             fontWeight: 300,
-            color: "rgba(240,240,240,0.40)",
+            color: "rgba(240,240,240,0.78)",
             letterSpacing: "0.01em",
             lineHeight: 1.6,
             marginBottom: "28px",
@@ -369,11 +392,11 @@ const ProjectCard = forwardRef<HTMLDivElement, { project: Project }>(
                   fontFamily: "var(--font-geist-sans)",
                   fontSize: "13px",
                   fontWeight: 300,
-                  color: "rgba(240,240,240,0.55)",
+                  color: "rgba(240,240,240,0.70)",
                   lineHeight: 1.72,
                 }}
               >
-                {bullet}
+                {boldImpact(bullet)}
               </span>
             </li>
           ))}
@@ -388,7 +411,7 @@ const ProjectCard = forwardRef<HTMLDivElement, { project: Project }>(
                   fontFamily: "var(--font-geist-mono)",
                   fontSize: "10px",
                   letterSpacing: "0.04em",
-                  color: "rgba(240,240,240,0.36)",
+                  color: "rgba(240,240,240,0.60)",
                 }}
               >
                 {t}
