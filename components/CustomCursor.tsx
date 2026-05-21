@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function CustomCursor() {
+  const pathname = usePathname();
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   const isHovering = useRef(false);
@@ -14,11 +16,12 @@ export default function CustomCursor() {
   const springX = useSpring(cursorX, springConfig);
   const springY = useSpring(cursorY, springConfig);
 
-  // Dot follows instantly
   const dotX = useMotionValue(-100);
   const dotY = useMotionValue(-100);
 
   useEffect(() => {
+    if (pathname === "/resume") return;
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -50,7 +53,9 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleOver);
     };
-  }, [cursorX, cursorY, dotX, dotY]);
+  }, [pathname, cursorX, cursorY, dotX, dotY]);
+
+  if (pathname === "/resume") return null;
 
   return (
     <>

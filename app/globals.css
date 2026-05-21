@@ -22,6 +22,12 @@
   cursor: none !important;
 }
 
+body.resume-cursor *,
+body.resume-cursor *::before,
+body.resume-cursor *::after {
+  cursor: auto !important;
+}
+
 html {
   scroll-behavior: smooth;
   background-color: var(--void);

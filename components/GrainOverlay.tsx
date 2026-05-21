@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function GrainOverlay() {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    if (pathname === "/resume") return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -33,7 +37,9 @@ export default function GrainOverlay() {
 
     paint();
     return () => clearTimeout(frameId);
-  }, []);
+  }, [pathname]);
+
+  if (pathname === "/resume") return null;
 
   return (
     <canvas

@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
-const COLORS      = ["#B8D4E8", "#8BAFC4", "#6B94A8"];
-const PIXEL_SIZE  = 6;
+const COLORS = ["#B8D4E8", "#8BAFC4", "#6B94A8"];
+const PIXEL_SIZE = 6;
 const TRAIL_LENGTH = 20;
-const FADE_SPEED  = 0.08;
+const FADE_SPEED = 0.08;
 
 interface Pixel {
   x: number;
@@ -15,26 +16,28 @@ interface Pixel {
 }
 
 export default function PixelCursorTrail() {
-  const canvasRef  = useRef<HTMLCanvasElement>(null);
-  const pixelsRef  = useRef<Pixel[]>([]);
-  const rafRef     = useRef<number>(0);
-  const lastCell   = useRef({ x: -999, y: -999 });
+  const pathname = usePathname();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pixelsRef = useRef<Pixel[]>([]);
+  const rafRef = useRef<number>(0);
+  const lastCell = useRef({ x: -999, y: -999 });
 
   useEffect(() => {
+    if (pathname === "/resume") return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const resize = () => {
-      canvas.width  = window.innerWidth;
+      canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     resize();
     window.addEventListener("resize", resize);
 
     const onMove = (e: MouseEvent) => {
-      // Snap to pixel grid so squares align cleanly
       const cx = Math.floor(e.clientX / PIXEL_SIZE) * PIXEL_SIZE;
       const cy = Math.floor(e.clientY / PIXEL_SIZE) * PIXEL_SIZE;
 
@@ -42,8 +45,8 @@ export default function PixelCursorTrail() {
       lastCell.current = { x: cx, y: cy };
 
       pixelsRef.current.push({
-        x:     cx,
-        y:     cy,
+        x: cx,
+        y: cy,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
         alpha: 1,
       });
@@ -63,7 +66,7 @@ export default function PixelCursorTrail() {
         if (p.alpha <= 0) continue;
         alive.push(p);
         ctx.globalAlpha = p.alpha;
-        ctx.fillStyle   = p.color;
+        ctx.fillStyle = p.color;
         ctx.fillRect(p.x, p.y, PIXEL_SIZE, PIXEL_SIZE);
       }
       pixelsRef.current = alive;
@@ -78,19 +81,21 @@ export default function PixelCursorTrail() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMove);
     };
-  }, []);
+  }, [pathname]);
+
+  if (pathname === "/resume") return null;
 
   return (
     <canvas
       ref={canvasRef}
       aria-hidden
       style={{
-        position:      "fixed",
-        inset:         0,
-        width:         "100%",
-        height:        "100%",
+        position: "fixed",
+        inset: 0,
+        width: "100%",
+        height: "100%",
         pointerEvents: "none",
-        zIndex:        9999,
+        zIndex: 9999,
       }}
     />
   );

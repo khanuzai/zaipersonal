@@ -80,7 +80,7 @@ function FlipBoardWord() {
 
   return (
     <motion.p
-      className="font-mono text-off-white/40 mt-2 tracking-[0.28em]"
+      className="font-mono text-off-white/65 mt-2 tracking-[0.28em]"
       style={{ fontSize: "clamp(9px, 1vw, 13px)" }}
       {...fadeUp(0.26)}
     >
@@ -94,16 +94,17 @@ export default function Hero() {
   return (
     <section className="relative flex flex-col h-screen overflow-hidden bg-black">
 
-      {/* Toronto skyline photo — bottom 57.5% */}
-      <div className="absolute bottom-0 left-0 right-0 h-[57.5%] z-[1] overflow-hidden">
+      {/* Toronto skyline photo — full height, city anchored at bottom */}
+      <div className="absolute inset-0 z-[1] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/JTwYnws.png"
           alt=""
           aria-hidden
-          className="w-full h-full object-cover object-bottom"
-          style={{ filter: "brightness(0.83) contrast(1.1)" }}
+          className="w-full h-full object-cover"
+          style={{ filter: "brightness(0.83) contrast(1.1)", objectPosition: "center 109%" }}
         />
+        {/* Top-fade: blends dark sky into #080808, eliminates hard line */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -158,7 +159,7 @@ export default function Hero() {
 
         {/* Permanent credentials */}
         <motion.p
-          className="font-mono text-off-white/40 mt-2 tracking-[0.22em]"
+          className="font-mono text-off-white/65 mt-2 tracking-[0.22em]"
           style={{ fontSize: "clamp(9px, 1vw, 13px)" }}
           {...fadeUp(0.18)}
         >
@@ -192,6 +193,27 @@ export default function Hero() {
         transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
         style={{ transformOrigin: "left" }}
       />
+
+      {/* Urdu signature — fixed bottom-right, like a painter's mark */}
+      <motion.span
+        aria-hidden
+        style={{
+          position: "fixed",
+          bottom: "32px",
+          right: "32px",
+          fontFamily: "'Noto Naskh Arabic', serif",
+          fontSize: "21px",
+          color: "rgba(240,240,240,0.65)",
+          lineHeight: 1,
+          pointerEvents: "none",
+          zIndex: 60,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, delay: 0.8 }}
+      >
+        عبداللہ خان
+      </motion.span>
 
       {/* Spacer fills the photo region */}
       <div className="flex-[0_0_57.5%]" />

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
 import GrainOverlay from "@/components/GrainOverlay";
 import CustomCursor from "@/components/CustomCursor";
@@ -9,6 +10,13 @@ import PixelCursorTrail from "@/components/ui/pixel-trail";
 import Nav from "@/components/Nav";
 import GlobalSpotlight from "@/components/GlobalSpotlight";
 import PageTransition from "@/components/PageTransition";
+
+const urduFont = Noto_Naskh_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-urdu",
+  display: "swap",
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -42,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-void">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-void text-off-white antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${urduFont.variable} bg-void text-off-white antialiased`}
       >
         <SmoothScroll />
         <GrainOverlay />

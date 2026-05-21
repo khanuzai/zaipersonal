@@ -18,6 +18,7 @@ const links = [
 
 export default function Nav() {
   const pathname = usePathname();
+  const isResume = pathname === "/resume";
 
   return (
     <motion.nav
@@ -28,7 +29,11 @@ export default function Nav() {
     >
       <Link
         href="/"
-        className="font-mono text-[11px] tracking-[0.3em] text-off-white/80 hover:text-off-white transition-colors duration-200 shrink-0"
+        className={`font-mono text-[11px] tracking-[0.3em] transition-colors duration-200 shrink-0 ${
+          isResume
+            ? "text-[#0D1B2A]/70 hover:text-[#0D1B2A]"
+            : "text-off-white/80 hover:text-off-white"
+        }`}
       >
         ZAI
       </Link>
@@ -40,9 +45,13 @@ export default function Nav() {
               <Link
                 href={l.href}
                 className={`font-mono text-[11px] tracking-[0.18em] transition-colors duration-200 ${
-                  active
-                    ? "text-off-white/90"
-                    : "text-off-white/60 hover:text-off-white"
+                  isResume
+                    ? active
+                      ? "text-[#0D1B2A]"
+                      : "text-[#0D1B2A]/45 hover:text-[#0D1B2A]"
+                    : active
+                      ? "text-off-white/90"
+                      : "text-off-white/60 hover:text-off-white"
                 }`}
               >
                 {l.label}

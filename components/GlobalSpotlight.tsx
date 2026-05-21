@@ -5,6 +5,7 @@ import { Component as SpotlightCursor } from "@/components/ui/spotlight-cursor";
 
 export default function GlobalSpotlight() {
   const pathname = usePathname();
+  if (pathname === "/resume") return null;
   const isHome = pathname === "/";
 
   return (

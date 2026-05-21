@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
 
 interface Drop {
   x: number;
@@ -10,9 +11,9 @@ interface Drop {
   opacity: number;
 }
 
-const ANGLE  = 15 * (Math.PI / 180);
-const SIN_A  = Math.sin(ANGLE);
-const COS_A  = Math.cos(ANGLE);
+const ANGLE = 15 * (Math.PI / 180);
+const SIN_A = Math.sin(ANGLE);
+const COS_A = Math.cos(ANGLE);
 
 function sr(n: number): number {
   const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
@@ -21,15 +22,20 @@ function sr(n: number): number {
 
 function makeDrops(W: number, H: number): Drop[] {
   return Array.from({ length: 520 }, (_, i) => ({
-    x:       sr(i * 3.7) * (W + 300) - 150,
-    y:       sr(i * 7.3) * H,
-    len:     12 + sr(i * 11.1) * 16,
-    speed:   5  + sr(i * 17.3) * 6,
+    x: sr(i * 3.7) * (W + 300) - 150,
+    y: sr(i * 7.3) * H,
+    len: 12 + sr(i * 11.1) * 16,
+    speed: 5 + sr(i * 17.3) * 6,
     opacity: 0.04 + sr(i * 23.1) * 0.12,
   }));
 }
 
-function step(ctx: CanvasRenderingContext2D, drops: Drop[], W: number, H: number) {
+function step(
+  ctx: CanvasRenderingContext2D,
+  drops: Drop[],
+  W: number,
+  H: number,
+) {
   ctx.save();
   ctx.lineWidth = 0.85;
 
@@ -38,8 +44,8 @@ function step(ctx: CanvasRenderingContext2D, drops: Drop[], W: number, H: number
     d.y += d.speed * COS_A;
 
     if (d.y > H + d.len) {
-      d.y  = -d.len - Math.random() * 120;
-      d.x  = Math.random() * (W + 300) - 150;
+      d.y = -d.len - Math.random() * 120;
+      d.x = Math.random() * (W + 300) - 150;
     }
 
     ctx.strokeStyle = `rgba(200,220,240,${d.opacity})`;
@@ -53,9 +59,10 @@ function step(ctx: CanvasRenderingContext2D, drops: Drop[], W: number, H: number
 }
 
 export default function RainCanvas() {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const dropsRef  = useRef<Drop[]>([]);
-  const rafRef    = useRef<number>(0);
+  const dropsRef = useRef<Drop[]>([]);
+  const rafRef = useRef<number>(0);
 
   const render = useCallback(() => {
     const canvas = canvasRef.current;
@@ -69,11 +76,13 @@ export default function RainCanvas() {
   }, []);
 
   useEffect(() => {
+    if (pathname === "/resume") return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const init = () => {
-      canvas.width  = window.innerWidth;
+      canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       dropsRef.current = makeDrops(canvas.width, canvas.height);
     };
@@ -92,7 +101,9 @@ export default function RainCanvas() {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", onResize);
     };
-  }, [render]);
+  }, [pathname, render]);
+
+  if (pathname === "/resume") return null;
 
   return (
     <canvas
