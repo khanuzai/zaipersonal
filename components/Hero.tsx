@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const SOCIAL_LINKS = [
   { label: "github",   href: "https://github.com/khanuzai" },
   { label: "linkedin", href: "https://linkedin.com/in/khanzai" },
-  { label: "twitter",  href: "https://x.com/kh4nzai" },
+  { label: "x",        href: "https://x.com/kh4nzai" },
   { label: "email",    href: "mailto:abdullah.khan1@uwaterloo.ca" },
 ];
 
