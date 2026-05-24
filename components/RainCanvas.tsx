@@ -116,6 +116,7 @@ export default function RainCanvas() {
         height: "100%",
         pointerEvents: "none",
         zIndex: 5,
+        opacity: pathname === "/gallery" ? 0.15 : 1,
       }}
     />
   );

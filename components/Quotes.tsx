@@ -146,7 +146,7 @@ export default function Quotes() {
                         position: "relative",
                         zIndex: 1,
                         fontFamily: "var(--font-geist-mono)",
-                        fontSize: "24px",
+                        fontSize: "19px",
                         color: "#E0E0E0",
                         fontWeight: 300,
                         lineHeight: 1.8,
