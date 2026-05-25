@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import HeroBatAnimations from "@/components/ui/hero-bat-animations";
 
 // ─── Social links ────────────────────────────────────────────────────────────
 const SOCIAL_LINKS = [
@@ -121,9 +120,6 @@ export default function Hero() {
           }}
         />
       </div>
-
-      {/* Bat signal + bat swarm canvases */}
-      <HeroBatAnimations />
 
       {/* Radial vignette */}
       <div
