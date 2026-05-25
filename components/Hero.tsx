@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 // ─── Social links ────────────────────────────────────────────────────────────
@@ -91,6 +92,13 @@ function FlipBoardWord() {
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 export default function Hero() {
+  const router = useRouter();
+
+  function handleUrduClick() {
+    sessionStorage.setItem("zai_awakened", "1");
+    router.push("/about");
+  }
+
   return (
     <section className="relative flex flex-col h-screen overflow-hidden bg-black">
 
@@ -197,20 +205,20 @@ export default function Hero() {
       {/* Urdu signature — fixed bottom-right, like a painter's mark */}
       <motion.span
         aria-hidden
+        onClick={handleUrduClick}
         style={{
           position: "fixed",
           bottom: "32px",
           right: "32px",
           fontFamily: "'Noto Naskh Arabic', serif",
           fontSize: "21px",
-          color: "rgba(240,240,240,0.65)",
           lineHeight: 1,
-          pointerEvents: "none",
           zIndex: 60,
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, color: "rgba(240,240,240,0.65)" }}
+        animate={{ opacity: 1, color: "rgba(240,240,240,0.65)" }}
         transition={{ duration: 1.2, delay: 0.8 }}
+        whileHover={{ color: "rgba(240,240,240,0.92)" }}
       >
         عبداللہ خان
       </motion.span>

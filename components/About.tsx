@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,6 +13,11 @@ export default function About() {
   const watermarkRef = useRef<HTMLDivElement>(null);
   const lineRef      = useRef<HTMLDivElement>(null);
   const wordsRef     = useRef<(HTMLSpanElement | null)[]>([]);
+  const [awakened, setAwakened] = useState(false);
+
+  useEffect(() => {
+    setAwakened(sessionStorage.getItem("zai_awakened") === "1");
+  }, []);
 
   const words = SENTENCE.split(" ");
 
@@ -153,6 +159,31 @@ export default function About() {
           ))}
         </p>
       </div>
+
+      {/* Hidden portal — only exists if you found the signature */}
+      {awakened && (
+        <Link
+          href="/quotes"
+          tabIndex={-1}
+          aria-hidden
+          style={{
+            position: "absolute",
+            left: "2.1rem",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontFamily: "'Noto Naskh Arabic', serif",
+            fontSize: "15px",
+            color: "rgba(240,240,240,0.07)",
+            textDecoration: "none",
+            transition: "color 0.6s ease",
+            zIndex: 10,
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(240,240,240,0.22)"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "rgba(240,240,240,0.07)"; }}
+        >
+          خان
+        </Link>
+      )}
 
       {/* Marquee — always running, never triggered by scroll */}
       <div

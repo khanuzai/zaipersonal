@@ -12,7 +12,6 @@ const links = [
   { href: "/gallery",    label: "gallery" },
   { href: "/friends",    label: "friends" },
   { href: "/media",      label: "media" },
-  { href: "/quotes",     label: "quotes" },
   { href: "/links",      label: "links" },
 ];
 
