@@ -20,7 +20,7 @@ export default function LinksPage() {
           lineHeight: 1,
         }}
       >
-        09
+        08
       </motion.div>
       <motion.p
         className="relative"

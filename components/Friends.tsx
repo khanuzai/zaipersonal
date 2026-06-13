@@ -20,72 +20,72 @@ const FRIENDS: Friend[] = [
     name: "Alex Chen",
     university: "UWaterloo",
     program: "CS",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: -4,
-    topOffset: 20,
+    topOffset: 18,
     siteUrl: null,
   },
   {
     name: "Sarah Kim",
     university: "UofT",
     program: "Engineering",
-    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: 5,
-    topOffset: 35,
+    topOffset: 30,
     siteUrl: null,
   },
   {
     name: "Omar Hassan",
     university: "Waterloo",
     program: "Math",
-    photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: -6,
-    topOffset: 8,
+    topOffset: 6,
     siteUrl: null,
   },
   {
     name: "Priya Patel",
     university: "McMaster",
     program: "Life Sci",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1521252659862-eec69941b071?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: 3,
-    topOffset: 28,
+    topOffset: 24,
     siteUrl: null,
   },
   {
     name: "Marcus Johnson",
     university: "UWaterloo",
     program: "CS/BBA",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: -2,
-    topOffset: 12,
+    topOffset: 10,
     siteUrl: null,
   },
   {
     name: "Fatima Al-Rashid",
     university: "Ryerson",
     program: "Business",
-    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: 6,
-    topOffset: 38,
+    topOffset: 32,
     siteUrl: null,
   },
   {
     name: "Daniel Park",
     university: "UWaterloo",
     program: "SE",
-    photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1492447166138-50c3889fccb1?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: -5,
-    topOffset: 5,
+    topOffset: 4,
     siteUrl: null,
   },
   {
     name: "Aisha Mohammed",
     university: "UofT",
     program: "CS",
-    photo: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&h=400&q=80",
+    photo: "https://images.unsplash.com/photo-1502323777036-f29e3972d82f?auto=format&fit=crop&w=400&h=400&q=80",
     rotation: 4,
-    topOffset: 22,
+    topOffset: 20,
     siteUrl: null,
   },
 ];
@@ -207,11 +207,26 @@ export default function Friends() {
 
       {/* Polaroid grid */}
       <div
-        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        style={{ gap: "28px", marginTop: "56px" }}
+        className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5"
+        style={{
+          gap: "22px",
+          marginTop: "56px",
+          maxWidth: "1240px",
+          marginLeft: "auto",
+          marginRight: "auto",
+        }}
       >
         {FRIENDS.map((friend, i) => (
-          <div key={friend.name} style={{ marginTop: `${friend.topOffset}px` }}>
+          <div
+            key={friend.name}
+            style={{
+              marginTop: `${friend.topOffset}px`,
+              maxWidth: "220px",
+              width: "100%",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
             <div
               ref={(el) => { cardsRef.current[i] = el; }}
               onClick={
@@ -221,7 +236,7 @@ export default function Friends() {
               }
               style={{
                 background: "#F5F0E8",
-                padding: "10px 10px 22px",
+                padding: "8px 8px 14px",
                 boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
                 cursor: friend.siteUrl ? "pointer" : "default",
                 transition: "box-shadow 0.3s ease",
@@ -249,11 +264,11 @@ export default function Friends() {
               />
 
               {/* Handwritten label */}
-              <div style={{ paddingTop: "10px", textAlign: "center" }}>
+              <div style={{ paddingTop: "6px", textAlign: "center" }}>
                 <p
                   style={{
                     fontFamily: "var(--font-caveat)",
-                    fontSize: "22px",
+                    fontSize: "17px",
                     fontWeight: 600,
                     color: "#1a1a1a",
                     lineHeight: 1.15,
@@ -264,10 +279,10 @@ export default function Friends() {
                 <p
                   style={{
                     fontFamily: "var(--font-caveat)",
-                    fontSize: "15px",
+                    fontSize: "12px",
                     color: "rgba(26,26,26,0.48)",
-                    lineHeight: 1.3,
-                    marginTop: "3px",
+                    lineHeight: 1.25,
+                    marginTop: "1px",
                   }}
                 >
                   {friend.university} · {friend.program}
